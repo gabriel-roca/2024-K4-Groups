@@ -116,6 +116,7 @@ C5 := Subgroup(A, [ ConjugatorAutomorphism( Group( [ (   2,   3,   4,   6)(   5,
 
 J := DirectProduct(CyclicGroup(5), CyclicGroup(2));
 homomorphisms := AllHomomorphismClasses(J, C5);
+Remove(homomorphisms, 1);
 
 listOfSemidirectProducts := List(homomorphisms, x -> SemidirectProduct(J, x, G));
 setOfOrderSets := Set(listOfSemidirectProducts, x -> Set(ConjugacyClasses(x), y -> Order(Representative(y))));
