@@ -1,8 +1,9 @@
-primeGraphComplement := function(group)
-    local vertexSet, edgeSet, elementOrders;
-    vertexSet := PrimeDivisors(Order(group));
+PrimeGraphComplement := function(group)
+    local G, vertexSet, edgeSet, elementOrders;
+    G := Image(IsomorphismPermGroup(group));
+    vertexSet := PrimeDivisors(Order(G));
     edgeSet := Combinations(vertexSet, 2);
-    elementOrders := Set(ConjugacyClasses(group), x -> Order(Representative(x)));
+    elementOrders := Set(ConjugacyClasses(G), x -> Order(Representative(x)));
     edgeSet := Filtered(edgeSet, x -> not x[1] * x[2] in elementOrders);
     return [vertexSet, edgeSet];
 end;

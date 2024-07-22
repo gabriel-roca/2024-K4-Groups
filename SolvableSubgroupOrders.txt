@@ -1,0 +1,9 @@
+SolvableSubgroupOrders := function(group)
+    local G, subgrps, solvableSubgrps, orders, primeDivisors;
+    G := Image(IsomorphismPermGroup(group));;
+    subgrps := List(ConjugacyClassesSubgroups(G), x -> Representative(x));;
+    solvableSubgrps := Filtered(subgrps, x -> IsSolvableGroup(x));;
+    orders := Set(solvableSubgrps, x -> Order(x));;
+    primeDivisors := Set(orders, x -> PrimeDivisors(x));
+    Print(primeDivisors);
+end;
