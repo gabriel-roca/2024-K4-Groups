@@ -9,4 +9,3 @@ HallSubgroupOrders := function(group)
     output := Set(hallOrders, x -> PrimeDivisors(x));
     Print(output);
 end;
-    
