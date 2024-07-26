@@ -1,0 +1,12 @@
+HallSubgroupOrders := function(group)
+    local G, primeDivisors, primePowers, possibleHallOrders, subgrpOrders, hallOrders, output;
+    G := Image(IsomorphismPermGroup(group));
+    primeDivisors := PrimeDivisors(Order(G));
+    primePowers := List(primeDivisors, x -> Order(SylowSubgroup(G,x)));
+    possibleHallOrders := List(Combinations(primePowers), x -> Product(x));
+    subgrpOrders := List(ConjugacyClassesSubgroups(G), x -> Order(Representative(x)));;
+    hallOrders := Filtered(subgrpOrders, x -> x in possibleHallOrders);
+    output := Set(hallOrders, x -> PrimeDivisors(x));
+    Print(output);
+end;
+    
