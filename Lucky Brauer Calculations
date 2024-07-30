@@ -1,0 +1,18 @@
+#The star of irrationality is very confusing so we try to avoid it where we can, however this is not always possible. 
+#So we use some dumb luck to try and get around it.
+#This code will only work if Irr(G) can run, as well as character and brauer tables being available.
+G := Some group;;primetocheck := p ;;ccs := ConjugacyClassesSubgroups(G);;list := [];;
+for i in ccs do
+if Order(Representative(i)) = primetocheck then
+Append(list, [Representative(i)])
+fi;
+od;
+chars := Irr(G);;
+for char in chars do
+for j in list do
+Print(j^char);
+Print("\n");
+od;
+Print("\n");
+Print("\n");
+od;
