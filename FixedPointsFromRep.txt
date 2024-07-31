@@ -1,0 +1,17 @@
+#given a representation of a group over the field with p elements, outputs a list of all q such that 
+#there exists an element of order q in the group which fixes a nontrivial point of the vector space.
+FixedPointsFromRep := function(rep, p)
+    local finalList, G, primes, eltsOfOrderR, r, g;
+    finalList := [];
+    G := Source(rep);
+    primes := PrimeDivisors(Order(G));
+    for r in primes do
+        eltsOfOrderR := Filtered(Elements(SylowSubgroup(G, r)), x -> Order(x) = r);
+        for g in eltsOfOrderR do
+            if Z(p)^0 in Eigenvalues(GF(p), rep(g)) then
+                Add(finalList, r);
+            fi;
+        od;
+    od;
+    return Set(finalList);
+end;
