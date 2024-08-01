@@ -1,0 +1,7 @@
+G := GroupToCheck;; ccsubs := ConjugacyClassesSubgroups(G);;
+for i in ccsubs do
+if IsSolvable(Representative(i)) = false then
+Print(StructureDescription(Representative(i)));
+Print("\n");
+fi;
+od;
