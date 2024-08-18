@@ -1,0 +1,11 @@
+#takes a group G and returns a list of all subgroups of Aut(G) containing Inn(G), up to conjugacy.
+SubgroupsBetweenInnAndAut := function(G)
+    local Aut, Inn, f, Out, listOfSubgroupsOfOut, listOfSubgroupsOfAut;
+    Aut := AutomorphismGroup(G);
+    Inn := InnerAutomorphismsAutomorphismGroup(Aut);
+    f := NaturalHomomorphismByNormalSubgroup(Aut, Inn);
+    Out := Image(f);
+    listOfSubgroupsOfOut := List(ConjugacyClassesSubgroups(Out), x -> Representative(x));
+    listOfSubgroupsOfAut := List(listOfSubgroupsOfOut, x -> PreImage(f, x));
+    return listOfSubgroupsOfAut;
+end;
