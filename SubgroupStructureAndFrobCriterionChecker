@@ -1,0 +1,20 @@
+LoadPackage("sonata");
+#Can replace G with whatever you want
+G:= AutomorphismGroup(PSL(2, 16));
+ccsubs := ConjugacyClassesSubgroups(G);;
+for i in ccsubs do
+Print(StructureDescription(Representative(i)));
+Print(" | ");
+Print(StructureDescription(SylowSubgroup(Representative(i), 2)));
+Print(" | ");
+Print(IsGeneralisedQuaternionGroup(SylowSubgroup(Representative(i), 2)));
+Print(" | ");
+Print(IsDihedralGroup(SylowSubgroup(Representative(i), 2)));
+Print(" | ");
+Print(IsCyclic(SylowSubgroup(Representative(i), 2)));
+Print(" | ");
+Print(IsIsomorphicGroup(DirectProduct(CyclicGroup(2), CyclicGroup(2)),Representative(i)));
+Print("\n");
+Print("\n");
+od;
+
