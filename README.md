@@ -2,4 +2,6 @@ Throughout our paper titled "Classification of the Prime Graphs of Sz(8)-, Sz(32
 
 Furthermore, manually searching for these specific extensions and finding their prime graph complements is a tedious task. To combat this we used the function IrreducibleRepresentations(G, p) in GAP. Where G is the group you want to check the representations of, and p is the specific prime you want to check the extensions for. This function is then used in tandem with the function we define in this docuemnt called FixedPointsFromRep. This then allows us to check for the fixed points using simple facts about eigenvectors and eigenvalues. Furthermore, we can easily construct the prime graph complement from these fixed points. 
 
+Most of the rest are simply methods we found useful at one point or another but were not a cornerstone of the coding for this project.
+
 Some code may be repeated from https://github.com/abiteofdata/K4-Groups/blob/main/README.md 
