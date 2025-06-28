@@ -1,1 +1,4 @@
-Space
+#This document gives an example of what our code would look like
+#when we check for the prime graph complement of one of these extensions.
+#For this example we are going to build the Semidirect product between Sz(8) of dimension 4 over GF(8)
+G := 
