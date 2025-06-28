@@ -1,4 +1,20 @@
 #This document gives an example of what our code would look like
 #when we check for the prime graph complement of one of these extensions.
 #For this example we are going to build the Semidirect product between Sz(8) of dimension 4 over GF(8)
-G := 
+
+a := [
+[0*Z(8),Z(8)^7,0*Z(8),0*Z(8)],
+[Z(8)^7,0*Z(8),0*Z(8),0*Z(8)],
+[0*Z(8),0*Z(8),0*Z(8),Z(8)^7],
+[0*Z(8),0*Z(8),Z(8)^7,0*Z(8)]
+];
+
+b := [
+[Z(8)^7,0*Z(8),0*Z(8),0*Z(8)],
+[0*Z(8),0*Z(8),Z(8)^7,0*Z(8)],
+[Z(8)^7,Z(8)^6,0*Z(8),Z(8)^5],
+[Z(8)^6,Z(8)^4,Z(8)^4,Z(8)^7]
+];
+
+sz8 := Group(a,b)
+G := SemidirectProduct(sz8, GF(8)^4)
