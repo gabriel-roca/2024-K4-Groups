@@ -12,6 +12,47 @@ PrimeGraphComplement := function(group)
     return [vertexSet, edgeSet];
 end;
 
+FixedPointsFromRep := function(rep, p)
+    local finalList, G, primes, eltsOfOrderR, r, g;
+    finalList := [];
+    G := Source(rep);
+    primes := PrimeDivisors(Order(G));
+    for r in primes do
+        eltsOfOrderR := Filtered(Elements(SylowSubgroup(G, r)), x -> Order(x) = r);
+        for g in eltsOfOrderR do
+            if Z(p)^0 in Eigenvalues(GF(p), rep(g)) then
+                Add(finalList, r);
+            fi;
+        od;
+    od;
+    return Set(finalList);
+end;
+
+PrimeGraphCompFromRep := function(rep, p)
+    local finalList, G, pgc, FixedPoints, RemovedEdges, els, edges;
+    G := Source(rep);;
+    pgc := PrimeGraphComplement(G);;
+    FixedPoints := FixedPointsFromRep(rep,p);;
+    RemovedEdges := [];;
+    for els in FixedPoints do;
+        if p <= els then; 
+            Append(RemovedEdges, [[p,els]]);
+        fi;
+        if p > els then;
+            Append(RemovedEdges, [[els, p]]);
+        fi;
+    od;
+    for edges in RemovedEdges do;
+        if edges in pgc[2] then;
+            RemoveSet(pgc[2], edges);
+        fi;
+    od;
+    return(pgc);
+    end;
+
+        
+
+
 #Beginning of the code
 a := [
 [0*Z(8),Z(8)^7,0*Z(8),0*Z(8)],
@@ -34,6 +75,22 @@ PrimeGraphComplement(G);
 #However, this is not the most effecient method sometimes. If the group has quadrillions of elements
 #this method may no longer be reasonable. We can also use the fact that these elements are matrices to find 
 #the graph as well.
+
+G := AtlasGroup("Sz(8)");; 
+Reps := IrreducibleRepresentations(G, GF(2));; 
+#this function will give the set of all irreducible representations over field of characteristic 2 (change prime as needed)
+#in this list should be the representation above, you just need to put some legwork in to find it
+#assume that the representation you want is the 3rd element of the list
+Map := Reps[3];;
+FixedPointsFromRep(Map, 2);
+#This will return all the vertices p such that you should remove the 2-p edge from the prime graph complement of Sz(8)
+#Since we are doing an extension of Sz(8) via a 2-group we will have a subgraph of the pgc of Sz(8) 
+#Furthermore, this list gives the primes whose edges from 2 should be removed
+#However, if that is too much work I present the alternative
+PrimeGraphCompFromRep(Map, 2);
+#This returns the prime graph complement of the group extension
+
+
 
 
 
