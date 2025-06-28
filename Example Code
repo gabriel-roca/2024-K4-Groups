@@ -1,7 +1,18 @@
 #This document gives an example of what our code would look like
 #when we check for the prime graph complement of one of these extensions.
 #For this example we are going to build the Semidirect product between Sz(8) of dimension 4 over GF(8)
+#Necessary Functions
+PrimeGraphComplement := function(group)
+    local G, vertexSet, edgeSet, elementOrders;
+    G := Image(IsomorphismPermGroup(group));
+    vertexSet := PrimeDivisors(Order(G));
+    edgeSet := Combinations(vertexSet, 2);
+    elementOrders := Set(ConjugacyClasses(G), x -> Order(Representative(x)));
+    edgeSet := Filtered(edgeSet, x -> not x[1] * x[2] in elementOrders);
+    return [vertexSet, edgeSet];
+end;
 
+#Beginning of the code
 a := [
 [0*Z(8),Z(8)^7,0*Z(8),0*Z(8)],
 [Z(8)^7,0*Z(8),0*Z(8),0*Z(8)],
@@ -16,5 +27,13 @@ b := [
 [Z(8)^6,Z(8)^4,Z(8)^4,Z(8)^7]
 ];
 
-sz8 := Group(a,b)
-G := SemidirectProduct(sz8, GF(8)^4)
+sz8 := Group(a,b);; G := SemidirectProduct(sz8, GF(8)^4);;
+PrimeGraphComplement(G);
+#This returns the vertex and edge set of the prime graph complement of G
+
+#However, this is not the most effecient method sometimes. If the group has quadrillions of elements
+#this method may no longer be reasonable. We can also use the fact that these elements are matrices to find 
+#the graph as well.
+
+
+
